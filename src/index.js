@@ -5,9 +5,19 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+const Home = lazy(() => import("./Home"));
+const About = lazy(() => import("./About"));
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <App />
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+        </Switch>
+      </Suspense>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );
